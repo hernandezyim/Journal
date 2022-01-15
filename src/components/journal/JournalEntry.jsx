@@ -22,7 +22,7 @@ export const JournalEntry = ({ note }) => {
     >
       {url && <img src={url} alt="img" width={90} />}
       
-        <p className=" fw-bold">
+        <p className="fw-bold">
           <strong>{title}</strong>
         </p>
       

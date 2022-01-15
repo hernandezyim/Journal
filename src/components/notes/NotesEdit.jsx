@@ -58,7 +58,7 @@ export const NotesEdit = () => {
       <div className="text-end">
         <i
           onClick={handleCloseNote}
-          className="far fa-window-close text-danger fa-5x pointer"
+          className="far fa-window-close text-danger fa-5x pointer animate__animated animate__pulse animate__slow animate__infinite"
         ></i>
       </div>
       <input
@@ -96,16 +96,16 @@ export const NotesEdit = () => {
           {activeNote.id && (
             <i
               onClick={handleDeleteNote}
-              className="far fa-trash-alt text-danger fa-5x pointer"
+              className="far fa-trash-alt text-danger fa-5x pointer animate__animated animate__pulse animate__slow animate__delay-2s animate__infinite"
             ></i>
           )}
           <i
             onClick={handleClickUpdateFile}
-            className="far fa-images text-dark fa-5x mx-3 pointer"
+            className="far fa-images text-dark fa-5x mx-3 pointer animate__animated animate__pulse animate__slow animate__delay-1s animate__infinite"
           ></i>
           <i
             onClick={handleSaveNote}
-            className="far fa-save text-success fa-5x pointer"
+            className="far fa-save text-success fa-5x pointer animate__animated animate__pulse animate__slow  animate__infinite"
           ></i>
         </div>
       </div>

@@ -42,7 +42,11 @@ input {
 /*  button  */
 
 .a:hover {
-  color: rgb(48, 48, 150) !important
+  color: rgb(48, 48, 150) !important;
+ 
+}
+a {
+  box-shadow: none !important;
 }
 
 .google-btn {
