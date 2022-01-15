@@ -34,7 +34,7 @@ export const RootRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/auth/*"
+          path="/journal/auth/*"
           element={
             <PublicRoute logged={logged}>
               <AuthRouter />
@@ -42,14 +42,14 @@ export const RootRouter = () => {
           }
         />
         <Route
-          path="/"
+          path="/journal"
           element={
             <PrivateRoute logged={logged}>
               <JournalScreen />
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/journal" />} />
       </Routes>
     </BrowserRouter>
   );

@@ -34,7 +34,7 @@ export const RegisterScreen = () => {
       {loading && <LoadingScreen />}
       <div className="auth__main vh-100 d-flex justify-content-center align-items-center">
         <div className="auth__box-container r bg-white animate__animated animate__flip">
-          <h3 className="auth__title text-center fw-bold">Registrar</h3>
+          <h3 className="auth__title text-center fw-bold">Registro</h3>
           <form onSubmit={handleRegister} noValidate>
             <input
               type="text"

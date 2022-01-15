@@ -125,6 +125,7 @@ input {
 .ui__helperText-error {
   color: #b00020;
   font-size: 12px;
+  font-weight: bold;
 }
 
 .ui__container-loading {

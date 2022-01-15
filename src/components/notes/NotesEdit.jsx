@@ -70,7 +70,7 @@ export const NotesEdit = () => {
         value={title}
       />
       <textarea
-        className="notes__textarea rounded-3"
+        className="notes__textarea rounded-3 fw-bold"
         placeholder="Escribe algo... lo que sea :)"
         name="body"
         cols="30"

@@ -24,10 +24,11 @@ export const Sidebar = ({ handleAddNewNote }) => {
         </div>
       </div>
       <div
-        className="journal__new-entry text-center mt-5 pointer "
+        className="journal__new-entry text-center mt-5 pointer d-flex flex-column mb-5"
         onClick={handleAddNewNote}
       >
-        <i className="far fa-plus-square mb-5 fa-8x" />
+        <i className="far fa-plus-square mb-2 fa-8x" />
+          <span>Agregar nueva nota</span>
       </div>
       <JournalEntries />
     </div>
