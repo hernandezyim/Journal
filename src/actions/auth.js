@@ -1,5 +1,5 @@
 import { signInWithPopup } from "firebase/auth";
-import { auth, googleAuthProvider } from "../configs/firebase-config";
+import { auth, googleAuthProvider } from "../configs/firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   updateProfile,

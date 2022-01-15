@@ -6,7 +6,7 @@ import { login } from "../actions/auth";
 import { startLoadingNotes } from "../actions/notes";
 import { JournalScreen } from "../components/journal/JournalScreen";
 import { LoadingScreen } from "../components/ui/LoadingScreen";
-import { auth } from "../configs/firebase-config";
+import { auth } from "../configs/firebaseConfig";
 import { AuthRouter } from "./AuthRouter";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";

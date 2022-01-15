@@ -1,6 +1,6 @@
 import { collection, addDoc, doc, setDoc, deleteDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
-import { auth, db } from "../configs/firebase-config";
+import { auth, db } from "../configs/firebaseConfig";
 import { fileUpload } from "../helpers/cloudinary/fileUpload";
 import { fetchDocs } from "../helpers/firebase/fetchDocs";
 import { handleError } from "../helpers/ui/handleError";

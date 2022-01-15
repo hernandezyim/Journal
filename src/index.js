@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import { JournalApp } from "./JournalApp";
 import "./styles/index.css";
-import "./configs/firebase-config";
+import "./configs/firebaseConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css";
 
