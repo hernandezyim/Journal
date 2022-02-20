@@ -55,9 +55,9 @@ export const startSaveNote = () => {
       }
 
       dispatch(endLoading());
-      Swal.fire("Nota guardada", activeNote.title, "success").then(() =>
-        dispatch(saveNote(activeNote))
-      );
+      await Swal.fire("Nota guardada", activeNote.title, "success");
+      dispatch(saveNote(activeNote));
+      
     } catch (error) {
       handleError(error.code, error.message);
     }

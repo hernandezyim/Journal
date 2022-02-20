@@ -25,7 +25,6 @@ export const startmiddlewareLogin = (email, password, setError) => {
       dispatch(endLoading());
 
       handleError(code, message, setError);
-      // console.table(Object.entries(console).sort());
     }
   };
 };

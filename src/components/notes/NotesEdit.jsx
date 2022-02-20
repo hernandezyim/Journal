@@ -39,12 +39,14 @@ export const NotesEdit = () => {
 
   useEffect(() => {
     if (!firstRender.current) return;
+    if(activeId.current === activeNote.id && url === activeNote.url) return;
+
+    reset(activeNote);
+
     if (activeId.current !== activeNote.id) {
-      reset(activeNote);
       activeId.current = activeNote.id;
-    } else if (activeId.current === activeNote.id && url !== activeNote.url) {
-      reset(activeNote);
     }
+
   }, [activeNote, reset, activeId, url]);
 
   useEffect(() => {
