@@ -13,10 +13,10 @@ export const RegisterScreen = () => {
   const { loading } = useSelector((state) => state.ui);
 
   const [formValues, handleInputChange] = useForm({
-    name: "",
-    email: "",
-    password: "",
-    password2: "",
+    name: "Yim",
+    email: "yimhernandez212@hotmail.com",
+    password: "ydh123456789",
+    password2: "ydh123456789",
   });
 
   const { name, email, password, password2 } = formValues;
@@ -90,10 +90,7 @@ export const RegisterScreen = () => {
               Crear cuenta
             </button>
 
-            <Link
-              to="/auth/login"
-              className="btn a text-primary fw-bold"
-            >
+            <Link to="/auth/login" className="btn a text-primary fw-bold">
               Ya estas registrado?
             </Link>
           </form>

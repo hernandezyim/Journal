@@ -16,14 +16,10 @@ export const startmiddlewareLogin = (email, password, setError) => {
   return async (dispatch) => {
     dispatch(startLoading());
     try {
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
-      const { uid, displayName } = user;
-
+      await signInWithEmailAndPassword(auth, email, password);
       dispatch(endLoading());
-      dispatch(login(uid, displayName));
     } catch ({ code, message }) {
       dispatch(endLoading());
-
       handleError(code, message, setError);
     }
   };
@@ -36,8 +32,8 @@ export const startmiddlewareLogout = () => {
       await signOut(auth);
 
       dispatch(logoutCleaningNote());
-      dispatch(endLoading());
       dispatch(logout());
+      dispatch(endLoading());
     } catch ({ code, message }) {
       dispatch(endLoading());
       handleError(code, message);
@@ -48,10 +44,7 @@ export const startmiddlewareLogout = () => {
 export const startGoogleLogin = () => {
   return async (dispatch) => {
     try {
-      const { user } = await signInWithPopup(auth, googleAuthProvider);
-      const { uid, displayName } = user;
-
-      dispatch(login(uid, displayName));
+      await signInWithPopup(auth, googleAuthProvider);
     } catch ({ code, message }) {
       dispatch(endLoading());
       handleError(code, message);
