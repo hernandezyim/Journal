@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
-import { JournalApp } from "./JournalApp";
+import JournalApp from "./JournalApp";
 import "./styles/index.css";
-import "./configs/firebaseConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css";
 
-ReactDOM.render(<JournalApp />, document.querySelector("#root"));
+const rootElement = document.getElementById("root");
+
+createRoot(rootElement).render(<JournalApp />);

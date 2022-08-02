@@ -1,14 +1,16 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { LoginScreen } from "../components/auth/LoginScreen";
-import { RegisterScreen } from "../components/auth/RegisterScreen";
+import SignInScreen from "../components/auth/SignInScreen";
+import SignUpScreen from "../components/auth/SignUpScreen";
 
-export const AuthRouter = () => {
+export default function AuthRouter() {
   return (
-    <Routes>
-      <Route path="login" element={<LoginScreen />} />
-      <Route path="register" element={<RegisterScreen />} />
+    <div className="auth__main vh-100 d-flex justify-content-center align-items-center">
+      <Routes>
+        <Route path="sign-in" element={<SignInScreen />} />
+        <Route path="sign-up" element={<SignUpScreen />} />
 
-      <Route path="*" element={<Navigate to="register" />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="sign-up" />} />
+      </Routes>
+    </div>
   );
-};
+}

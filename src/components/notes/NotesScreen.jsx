@@ -1,14 +1,14 @@
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { NothingSelected } from "../journal/NothingSelected";
-import { Sidebar } from "../journal/Sidebar";
-import { NotesEdit } from "./NotesEdit";
 import { setActiveNote } from "../../actions/notes";
 import { useMediaQuery } from "react-responsive";
+import NothingSelected from "../journal/NothingSelected";
+import Sidebar from "../journal/Sidebar";
+import NotesEdit from "./NotesEdit";
+import useNotes from "../../hooks/useNotes";
 
-export const NotesScreen = () => {
+export default function NotesScreen() {
   const dispatch = useDispatch();
-  const { activeNote } = useSelector((state) => state.notes);
+  const { activeNote } = useNotes();
 
   const handleAddNewNote = () => {
     if (activeNote) return;
@@ -30,7 +30,7 @@ export const NotesScreen = () => {
           <Sidebar handleAddNewNote={handleAddNewNote} />
         </div>
       )}
-      <div className="col-md-8 p-0">
+      <div className="col-md-8 p-0 bg-primary">
         {activeNote ? (
           <NotesEdit />
         ) : !matches && !activeNote ? (
@@ -41,4 +41,4 @@ export const NotesScreen = () => {
       </div>
     </div>
   );
-};
+}

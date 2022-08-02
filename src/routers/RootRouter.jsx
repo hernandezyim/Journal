@@ -1,36 +1,34 @@
-import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { login } from "../actions/auth";
-import { startLoadingNotes } from "../actions/notes";
-import { JournalScreen } from "../components/journal/JournalScreen";
-import { LoadingScreen } from "../components/ui/LoadingScreen";
-import { auth } from "../configs/firebaseConfig";
-import { AuthRouter } from "./AuthRouter";
-import { PrivateRoute } from "./PrivateRoute";
-import { PublicRoute } from "./PublicRoute";
+import { signIn } from "../actions/auth";
 
-export const RootRouter = () => {
+import JournalScreen from "../components/journal/JournalScreen";
+import LoadingScreen from "../components/ui/LoadingScreen";
+import AuthRouter from "./AuthRouter";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
+import useAuth from "../hooks/useAuth";
+import isAuthenticated from "../services/auth/isAuthenticated";
+
+export default function RootRouter() {
   const dispatch = useDispatch();
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const { logged } = useSelector((state) => state.auth);
+  const { logged } = useAuth();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(login(user.uid, user.displayName));
-        dispatch(startLoadingNotes());
-      }
+    (async () => {
+      const user = await isAuthenticated();
+
+      if (user) dispatch(signIn(user));
+
       setIsChecked(true);
-    });
+    })();
   }, [dispatch]);
 
-  if (!isChecked) return <LoadingScreen />;
-
-  return (
+  return isChecked ? (
     <BrowserRouter>
       <Routes>
         <Route
@@ -52,5 +50,7 @@ export const RootRouter = () => {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
+  ) : (
+    <LoadingScreen home={true} />
   );
-};
+}

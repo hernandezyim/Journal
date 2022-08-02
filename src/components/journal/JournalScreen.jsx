@@ -1,9 +1,17 @@
-import { useSelector } from "react-redux";
-import { LoadingScreen } from "../ui/LoadingScreen";
-import { NotesScreen } from "../notes/NotesScreen";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import LoadingScreen from "../ui/LoadingScreen";
+import NotesScreen from "../notes/NotesScreen";
+import useUi from "../../hooks/useUi";
+import startGetNotes from "../../services/notes/startGetNotes";
 
-export const JournalScreen = () => {
-  const { loading } = useSelector((state) => state.ui);
+export default function JournalScreen() {
+  const { loading } = useUi();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(startGetNotes());
+  }, [dispatch]);
 
   return (
     <>
@@ -13,4 +21,4 @@ export const JournalScreen = () => {
       </div>
     </>
   );
-};
+}

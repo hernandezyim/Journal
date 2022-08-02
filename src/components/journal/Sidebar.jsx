@@ -1,20 +1,21 @@
-import { JournalEntries } from "./JournalEntries";
-import { useDispatch, useSelector } from "react-redux";
-import { startmiddlewareLogout } from "../../actions/auth";
+import { useDispatch } from "react-redux";
+import { signOut } from "../../actions/auth";
+import JournalEntries from "./JournalEntries";
+import useAuth from "../../hooks/useAuth";
 
-export const Sidebar = ({ handleAddNewNote }) => {
+export default function Sidebar({ handleAddNewNote }) {
   const dispatch = useDispatch();
 
-  const { displayName } = useSelector((state) => state.auth);
+  const { name } = useAuth();
 
-  const handleLogout = () => dispatch(startmiddlewareLogout());
+  const handleLogout = () => dispatch(signOut());
 
   return (
     <div className="notes__sideBar vh-100 bg-dark text-light p-4">
       <div className="d-flex align-items-center justify-content-around">
         <div className="h5 mt-2 w-100 d-flex  align-items-center">
           <i className="far fa-address-card fa-2x" />
-          <span className="ms-3">{displayName}</span>
+          <span className="ms-3">{name}</span>
           <div className="d-flex justify-content-end w-100 ">
             <i
               onClick={handleLogout}
@@ -28,9 +29,9 @@ export const Sidebar = ({ handleAddNewNote }) => {
         onClick={handleAddNewNote}
       >
         <i className="far fa-calendar-plus mb-2 fa-8x" />
-          <span>Agregar nueva nota</span>
+        <span>Agregar nueva nota</span>
       </div>
       <JournalEntries />
     </div>
   );
-};
+}

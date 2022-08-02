@@ -1,6 +1,8 @@
-export const types = {
-  auth: {
-    login: "[Auth] Login",
-    logout: "[Auth] Logout",
+const types = {
+  AUTH: {
+    SIGN_IN: "[Auth] signIn",
+    SIGN_OUT: "[Auth] signOut",
   },
 };
+
+export default types;

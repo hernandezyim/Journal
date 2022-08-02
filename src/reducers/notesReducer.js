@@ -1,40 +1,40 @@
-import { types } from "../types/notes/types";
+import TYPES from "../types/notes/types";
 
 const initialState = {
   notes: [],
   activeNote: null,
 };
 
-export const notesReducer = (state = initialState, action) => {
+export default function notesReducer(state = initialState, action) {
   let newNotes = [];
   switch (action.type) {
-    case types.setActiveNote:
+    case TYPES.NOTES.SET_ACTIVE:
       return {
         ...state,
         activeNote: {
           ...action.payload,
         },
       };
-    case types.loadNote:
+    case TYPES.NOTES.LOAD:
       return {
         ...state,
         notes: [...action.payload],
       };
-    case types.saveNote:
-      newNotes = state.notes.map((note) =>
-        note.id === action.payload.id ? action.payload : note
-      );
-
-      const isExits = newNotes.find(({ id }) => id === action.payload.id);
-      if (!isExits) newNotes.push(action.payload);
-
+    case TYPES.NOTES.SAVE:
+      newNotes = [...state.notes];
+      const index = newNotes.findIndex((n) => n.id === action.payload.id);
+      if (index >= 0) {
+        newNotes[index] = action.payload;
+      } else {
+        newNotes.push(action.payload);
+      }
       return {
         ...state,
         activeNote: null,
         notes: [...newNotes],
       };
 
-    case types.deleteNote:
+    case TYPES.NOTES.DELETE:
       newNotes = state.notes.filter(({ id }) => id !== action.payload);
 
       return {
@@ -43,12 +43,12 @@ export const notesReducer = (state = initialState, action) => {
         notes: [...newNotes],
       };
 
-    case types.closeNote:
+    case TYPES.NOTES.CLOSE:
       return {
         ...state,
         activeNote: null,
       };
-    case types.logoutCleaningNote:
+    case TYPES.NOTES.SIGN_OUT_CLEANING:
       return {
         ...state,
         activeNote: null,
@@ -57,4 +57,4 @@ export const notesReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
