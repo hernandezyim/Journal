@@ -13,6 +13,7 @@ export default function JournalEntry({ note }) {
   const momentDate = moment(Number(date));
 
   const handleEntryClick = () => {
+    if (activeNote?.id === note.id) return;
     if (activeNote) dispatch(closeNote());
     dispatch(setActiveNote(note));
   };

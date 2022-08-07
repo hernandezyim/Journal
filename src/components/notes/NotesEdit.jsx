@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { setActiveNote, closeNote, loadImage } from "../../actions/notes";
+import { setActiveNote, closeNote } from "../../actions/notes";
 import useForm from "../../hooks/useForm";
 import useNotes from "../../hooks/useNotes";
 import startDeleteNote from "../../services/notes/startDeleteNote";
@@ -11,49 +11,44 @@ export default function NotesEdit() {
 
   const { activeNote } = useNotes();
 
-  const [formValues, handleInputChange, reset] = useForm(activeNote);
+  const [values, handleInputChange] = useForm(activeNote);
 
-  const { body, title, photo_url, id } = formValues;
+  const { body, title, photo_url, id } = values;
 
-  const activeId = useRef(id);
-  const InputRef = useRef();
+  const fileInput = useRef();
   const firstRender = useRef(false);
 
   const handleSaveNote = () => dispatch(startSaveNote());
 
-  const handleClickUpdateFile = () => InputRef.current.click();
+  const handleClickUpdateFile = () => fileInput.current.click();
 
-  const handleInputChangeFile = ({ target }) =>
-    target.files[0] && dispatch(loadImage(target.files[0]));
+  const handleInputChangeFile = ({ target }) => {
+    const [file] = target.files;
+    if (!file) return;
 
-  const handleDeleteNote = () => {
-    dispatch(startDeleteNote(id));
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = ({ target }) => {
+      activeNote.file = file;
+
+      handleInputChange({
+        target: {
+          name: "photo_url",
+          value: target.result,
+        },
+      });
+    };
   };
 
-  const handleCloseNote = () => {
-    dispatch(closeNote());
-  };
+  const handleDeleteNote = () => dispatch(startDeleteNote(id));
 
-  useEffect(() => {
-    if (!firstRender.current) return;
-    if (
-      activeId.current === activeNote.id &&
-      photo_url === activeNote.photo_url
-    )
-      return;
-
-    reset(activeNote);
-
-    if (activeId.current !== activeNote.id) {
-      activeId.current = activeNote.id;
-    }
-  }, [activeNote, reset, activeId, photo_url]);
+  const handleCloseNote = () => dispatch(closeNote());
 
   useEffect(() => {
     firstRender.current
-      ? dispatch(setActiveNote(formValues))
+      ? dispatch(setActiveNote(values))
       : (firstRender.current = true);
-  }, [dispatch, formValues]);
+  }, [dispatch, values]);
   return (
     <div className="pt-5 px-5 d-flex flex-column ">
       <div className="text-end">
@@ -81,10 +76,10 @@ export default function NotesEdit() {
       ></textarea>
 
       <div className="d-flex justify-content-between mt-5">
-        {(photo_url || activeNote.photo_temp) && (
+        {photo_url && (
           <img
             className="p-0 m-0 rounded"
-            src={photo_url || activeNote.photo_temp}
+            src={photo_url}
             alt="img"
             width={100}
             height={100}
@@ -92,7 +87,7 @@ export default function NotesEdit() {
         )}
 
         <input
-          ref={InputRef}
+          ref={fileInput}
           type="file"
           id="file"
           style={{ display: "none" }}
