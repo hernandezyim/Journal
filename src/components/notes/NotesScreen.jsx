@@ -33,10 +33,10 @@ export default function NotesScreen() {
       <div className="col-md-8 p-0 bg-primary">
         {activeNote ? (
           <NotesEdit />
-        ) : !matches && !activeNote ? (
-          <Sidebar handleAddNewNote={handleAddNewNote} />
-        ) : (
+        ) : matches ? (
           <NothingSelected handleAddNewNote={handleAddNewNote} />
+        ) : (
+          <Sidebar handleAddNewNote={handleAddNewNote} />
         )}
       </div>
     </div>
